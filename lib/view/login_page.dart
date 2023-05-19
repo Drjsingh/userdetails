@@ -158,6 +158,7 @@ class _Login_pageState extends State<Login_page> {
                                             await apiservice.loginUser(
                                                 _emailctrl.text,
                                                 _passwordctrl.text);
+                                        print("response-----$response");
                                         if (response['token'] != null) {
                                           CustomUIBlock.unblock(context);
                                           Navigator.of(context).push(
@@ -171,12 +172,13 @@ class _Login_pageState extends State<Login_page> {
                                                             _emailctrl.text),
                                                       )));
                                         } else {
+                                          CustomUIBlock.unblock(context);
                                           final snackBar = SnackBar(
                                               content: Row(
-                                                children: const [
+                                                children: [
                                                   Flexible(
                                                     child: Text(
-                                                      "You are not a registered User, Please create an Account for Login",
+                                                      response['error'],
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontFamily: 'Poppins',
