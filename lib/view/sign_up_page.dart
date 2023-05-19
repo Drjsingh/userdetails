@@ -226,7 +226,6 @@ class _SignUpUserState extends State<SignUpUser> {
                                           await apiservice.registerUser(
                                               _emailctrl.text,
                                               _verifypwdilctrl.text);
-                                      print("ressponse---------$response");
                                       if (response['token'] != null) {
                                         Popup().RegisterSuccessfully(context);
                                       } else {

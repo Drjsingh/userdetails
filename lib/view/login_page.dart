@@ -152,13 +152,46 @@ class _Login_pageState extends State<Login_page> {
                                 ),
                                 child: MaterialButton(
                                     onPressed: () async {
+                                      String pwd = _passwordctrl.text;
+                                      bool wrongPwd;
                                       if (_formkey.currentState!.validate()) {
                                         CustomUIBlock.block(context);
+                                        if (pwd == 'pistol' ||
+                                            pwd == "cityslicka") {
+                                          wrongPwd = false;
+                                        } else {
+                                          wrongPwd = true;
+                                        }
+                                        if (_emailctrl.text ==
+                                                'eve.holt@reqres.in' &&
+                                            wrongPwd == true) {
+                                          CustomUIBlock.unblock(context);
+                                          final snackBar = SnackBar(
+                                              content: Row(
+                                                children: [
+                                                  Flexible(
+                                                    child: Text(
+                                                      "Incorrect Password",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: 'Poppins',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              duration:
+                                                  const Duration(seconds: 3),
+                                              backgroundColor: Colors.red);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                          return;
+                                        }
+
                                         var response =
                                             await apiservice.loginUser(
                                                 _emailctrl.text,
                                                 _passwordctrl.text);
-                                        print("response-----$response");
                                         if (response['token'] != null) {
                                           CustomUIBlock.unblock(context);
                                           Navigator.of(context).push(

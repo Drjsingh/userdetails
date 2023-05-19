@@ -14,6 +14,7 @@ class ApiService {
           'Accept': '*/*',
         },
       );
+      print("api response ------${response.body}");
       return jsonDecode(response.body);
     } catch (e) {
       print("Error Occured in Main Post Method");
